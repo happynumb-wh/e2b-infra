@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"fmt"
 	"path/filepath"
+	"runtime"
 	txtTemplate "text/template"
 
 	"github.com/e2b-dev/infra/packages/orchestrator/pkg/cfg"
@@ -27,6 +28,12 @@ type startScriptArgs struct {
 	NamespaceID       string
 	FirecrackerPath   string
 	FirecrackerSocket string
+
+	// SeccompArg is appended to the firecracker command line. On arm64 it is
+	// " --no-seccomp" because the upstream seccomp filter is missing syscalls
+	// used by the snapshot / dirty-memory path (FC exits 148 BadSyscall otherwise).
+	// Empty on other arches.
+	SeccompArg string
 }
 
 // StartScriptResult contains the generated script and computed paths
@@ -49,7 +56,7 @@ ln -s {{ .HostRootfsPath }} {{ .DeprecatedSandboxRootfsDir }}/{{ .SandboxRootfsF
 mount -t tmpfs tmpfs {{ .SandboxDir }}/{{ .SandboxKernelDir }} -o X-mount.mkdir &&
 ln -s {{ .HostKernelPath }} {{ .SandboxDir }}/{{ .SandboxKernelDir }}/{{ .SandboxKernelFile }} &&
 
-ip netns exec {{ .NamespaceID }} {{ .FirecrackerPath }} --api-sock {{ .FirecrackerSocket }}`
+ip netns exec {{ .NamespaceID }} {{ .FirecrackerPath }} --api-sock {{ .FirecrackerSocket }}{{ .SeccompArg }}`
 
 const startScriptV2 = `mount --make-rprivate / &&
 mount -t tmpfs tmpfs {{ .SandboxDir }} -o X-mount.mkdir &&
@@ -59,7 +66,7 @@ ln -s {{ .HostRootfsPath }} {{ .SandboxDir }}/{{ .SandboxRootfsFile }} &&
 mkdir -p {{ .SandboxDir }}/{{ .SandboxKernelDir }} &&
 ln -s {{ .HostKernelPath }} {{ .SandboxDir }}/{{ .SandboxKernelDir }}/{{ .SandboxKernelFile }} &&
 
-ip netns exec {{ .NamespaceID }} {{ .FirecrackerPath }} --api-sock {{ .FirecrackerSocket }}`
+ip netns exec {{ .NamespaceID }} {{ .FirecrackerPath }} --api-sock {{ .FirecrackerSocket }}{{ .SeccompArg }}`
 
 // StartScriptBuilder handles the creation and execution of firecracker start scripts
 type StartScriptBuilder struct {
@@ -87,6 +94,14 @@ func (sb *StartScriptBuilder) buildArgs(
 	rootfsPaths RootfsPaths,
 	namespaceID string,
 ) startScriptArgs {
+	// On arm64 the upstream firecracker seccomp filter lacks syscalls used by
+	// the snapshot / dirty-memory path, so FC self-terminates with exit 148
+	// (BadSyscall). Disable seccomp on arm64. x86_64's filter is complete.
+	seccompArg := ""
+	if runtime.GOARCH == "arm64" {
+		seccompArg = " --no-seccomp"
+	}
+
 	return startScriptArgs{
 		// General
 		SandboxDir: sb.builderConfig.SandboxDir,
@@ -105,6 +120,7 @@ func (sb *StartScriptBuilder) buildArgs(
 		NamespaceID:       namespaceID,
 		FirecrackerPath:   versions.FirecrackerPath(sb.builderConfig),
 		FirecrackerSocket: files.SandboxFirecrackerSocketPath(),
+		SeccompArg:        seccompArg,
 	}
 }
 
