@@ -10,6 +10,15 @@ echo "Starting provisioning script"
 # GCP Specific logic
 {{ end }}
 
+
+echo "Switching apt sources to mirrors.ustc.edu.cn"
+if [ -f /etc/apt/sources.list.d/debian.sources ]; then
+    sed -i 's|http://deb.debian.org|http://mirrors.ustc.edu.cn|g' /etc/apt/sources.list.d/debian.sources
+fi
+if [ -f /etc/apt/sources.list ]; then
+    sed -i 's|http://deb.debian.org|http://mirrors.ustc.edu.cn|g' /etc/apt/sources.list
+fi
+
 echo "Making configuration immutable"
 $BUSYBOX chattr +i /etc/resolv.conf
 
