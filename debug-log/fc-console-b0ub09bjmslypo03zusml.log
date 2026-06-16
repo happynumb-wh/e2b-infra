@@ -1,28 +1,28 @@
-2026-06-16T21:00:40.639981764 [anonymous-instance:main] Running Firecracker v1.12.1
-2026-06-16T21:00:40.640925553 [anonymous-instance:main] Listening on API socket ("/tmp/fc-b9h8xtfdhup5mk8nckdsn-cdppnqmtquxyrbhn1lu6.sock").
-2026-06-16T21:00:40.641146126 [anonymous-instance:fc_api] API server started.
-2026-06-16T21:00:40.649380931 [anonymous-instance:fc_api] The API server received a Put request on "/metrics" with body "{\"metrics_path\":\"/tmp/fc-metrics-b9h8xtfdhup5mk8nckdsn-cdppnqmtquxyrbhn1lu6.fifo\"}\n".
-2026-06-16T21:00:40.649428472 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:00:40.650185557 [anonymous-instance:fc_api] The API server received a Put request on "/boot-source" with body "{\"boot_args\":\"clocksource=kvm-clock console=ttyS0 i8042.noaux i8042.nokbd init=usr/bin/init ip=169.254.0.21::169.254.0.22:255.255.255.252:instance:eth0:off:tap0 ipv6.autoconf=1 ipv6.disable=0 loglevel=5 panic=1 pci=off random.trust_cpu=on reboot=k rootflags=discard\",\"kernel_image_path\":\"/fc-vm/vmlinux-6.1.158/vmlinux.bin\"}\n".
-2026-06-16T21:00:40.650224822 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:00:40.651399593 [anonymous-instance:fc_api] The API server received a Put request on "/drives/rootfs" with body "{\"drive_id\":\"rootfs\",\"io_engine\":\"Sync\",\"is_root_device\":true,\"path_on_host\":\"/fc-vm/rootfs.ext4\"}\n".
-2026-06-16T21:00:40.651462277 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:00:40.652123083 [anonymous-instance:fc_api] The API server received a Put request on "/network-interfaces/eth0" with body "{\"guest_mac\":\"02:FC:00:00:00:05\",\"host_dev_name\":\"tap0\",\"iface_id\":\"eth0\"}\n".
-2026-06-16T21:00:40.652375638 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:00:40.652850166 [anonymous-instance:fc_api] The API server received a Put request on "/mmds/config" with body "{\"network_interfaces\":[\"eth0\"],\"version\":\"V2\"}\n".
-2026-06-16T21:00:40.652913207 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:00:40.653712729 [anonymous-instance:fc_api] The API server received a Put request on "/machine-config" with body "{\"huge_pages\":\"2M\",\"mem_size_mib\":512,\"smt\":true,\"track_dirty_pages\":false,\"vcpu_count\":2}\n".
-2026-06-16T21:00:40.653734234 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:00:40.654128880 [anonymous-instance:fc_api] The API server received a Put request on "/entropy" with body "{\"rate_limiter\":{\"bandwidth\":{\"one_time_burst\":0,\"refill_time\":100,\"size\":1024}}}\n".
-2026-06-16T21:00:40.654179775 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:00:40.654562406 [anonymous-instance:fc_api] The API server received a Put request on "/actions" with body "{\"action_type\":\"InstanceStart\"}\n".
-2026-06-16T21:00:40.668954668 [anonymous-instance:main] Artificially kick devices.
-2026-06-16T21:00:40.668993163 [anonymous-instance:fc_vcpu 0] Received a VcpuEvent::Resume message with immediate_exit enabled. immediate_exit was disabled before proceeding
-2026-06-16T21:00:40.669007368 [anonymous-instance:fc_vcpu 1] Received a VcpuEvent::Resume message with immediate_exit enabled. immediate_exit was disabled before proceeding
-2026-06-16T21:00:40.669041275 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-[    0.008335] SELinux: CONFIG_SECURITY_SELINUX_CHECKREQPROT_VALUE is non-zero.  This is deprecated and will be rejected in a future kernel release.
-[    0.008335] SELinux: https://github.com/SELinuxProject/selinux-kernel/wiki/DEPRECATE-checkreqprot
-[    0.045543] EXT4-fs (vda): mounting with "discard" option, but the device does not support discard
+2026-06-16T21:32:48.939695018 [anonymous-instance:main] Running Firecracker v1.12.1
+2026-06-16T21:32:48.940555121 [anonymous-instance:main] Listening on API socket ("/tmp/fc-b0ub09bjmslypo03zusml-r4gk3ir8f7zchdgsji2z.sock").
+2026-06-16T21:32:48.940772760 [anonymous-instance:fc_api] API server started.
+2026-06-16T21:32:48.949821394 [anonymous-instance:fc_api] The API server received a Put request on "/metrics" with body "{\"metrics_path\":\"/tmp/fc-metrics-b0ub09bjmslypo03zusml-r4gk3ir8f7zchdgsji2z.fifo\"}\n".
+2026-06-16T21:32:48.949868567 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:32:48.950962690 [anonymous-instance:fc_api] The API server received a Put request on "/boot-source" with body "{\"boot_args\":\"clocksource=kvm-clock console=ttyS0 i8042.noaux i8042.nokbd init=usr/bin/init ip=169.254.0.21::169.254.0.22:255.255.255.252:instance:eth0:off:tap0 ipv6.autoconf=1 ipv6.disable=0 loglevel=5 panic=1 pci=off random.trust_cpu=on reboot=k rootflags=discard\",\"kernel_image_path\":\"/fc-vm/vmlinux-6.1.158/vmlinux.bin\"}\n".
+2026-06-16T21:32:48.951319971 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:32:48.952055024 [anonymous-instance:fc_api] The API server received a Put request on "/drives/rootfs" with body "{\"drive_id\":\"rootfs\",\"io_engine\":\"Sync\",\"is_root_device\":true,\"path_on_host\":\"/fc-vm/rootfs.ext4\"}\n".
+2026-06-16T21:32:48.952118141 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:32:48.953026576 [anonymous-instance:fc_api] The API server received a Put request on "/network-interfaces/eth0" with body "{\"guest_mac\":\"02:FC:00:00:00:05\",\"host_dev_name\":\"tap0\",\"iface_id\":\"eth0\"}\n".
+2026-06-16T21:32:48.953373071 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:32:48.953732646 [anonymous-instance:fc_api] The API server received a Put request on "/mmds/config" with body "{\"network_interfaces\":[\"eth0\"],\"version\":\"V2\"}\n".
+2026-06-16T21:32:48.953785150 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:32:48.954317911 [anonymous-instance:fc_api] The API server received a Put request on "/machine-config" with body "{\"huge_pages\":\"2M\",\"mem_size_mib\":512,\"smt\":true,\"track_dirty_pages\":false,\"vcpu_count\":2}\n".
+2026-06-16T21:32:48.954336224 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:32:48.954713650 [anonymous-instance:fc_api] The API server received a Put request on "/entropy" with body "{\"rate_limiter\":{\"bandwidth\":{\"one_time_burst\":0,\"refill_time\":100,\"size\":1024}}}\n".
+2026-06-16T21:32:48.954758205 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:32:48.955125584 [anonymous-instance:fc_api] The API server received a Put request on "/actions" with body "{\"action_type\":\"InstanceStart\"}\n".
+2026-06-16T21:32:48.973920593 [anonymous-instance:main] Artificially kick devices.
+2026-06-16T21:32:48.973958835 [anonymous-instance:fc_vcpu 0] Received a VcpuEvent::Resume message with immediate_exit enabled. immediate_exit was disabled before proceeding
+2026-06-16T21:32:48.973974544 [anonymous-instance:fc_vcpu 1] Received a VcpuEvent::Resume message with immediate_exit enabled. immediate_exit was disabled before proceeding
+2026-06-16T21:32:48.974008014 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+[    0.008385] SELinux: CONFIG_SECURITY_SELINUX_CHECKREQPROT_VALUE is non-zero.  This is deprecated and will be rejected in a future kernel release.
+[    0.008385] SELinux: https://github.com/SELinuxProject/selinux-kernel/wiki/DEPRECATE-checkreqprot
+[    0.045452] EXT4-fs (vda): mounting with "discard" option, but the device does not support discard
 Mounting essential filesystems
 mount: /dev: devtmpfs already mounted on /dev.
        dmesg(1) may have more information after failed mount system call.
@@ -51,7 +51,7 @@ System Init
 [external] Get:4 http://mirrors.ustc.edu.cn/debian bookworm/main amd64 Packages [8790 kB]
 [external] Get:5 http://mirrors.ustc.edu.cn/debian bookworm-updates/main amd64 Packages [6924 B]
 [external] Get:6 http://mirrors.ustc.edu.cn/debian-security bookworm-security/main amd64 Packages [311 kB]
-[external] Fetched 9363 kB in 2s (3753 kB/s)
+[external] Fetched 9363 kB in 2s (4373 kB/s)
 [external] Reading package lists...
 [external] W: Download is performed unsandboxed as root as file '/var/lib/apt/lists/partial/mirrors.ustc.edu.cn_debian_dists_bookworm_InRelease' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
 [external] Selecting previously unselected package libargon2-1:amd64.
@@ -87,7 +87,7 @@ System Init
 [external] Selecting previously unselected package libapparmor1:amd64.
 [external] Preparing to unpack .../8-libapparmor1_3.0.8-3_amd64.deb ...
 [external] Unpacking libapparmor1:amd64 (3.0.8-3) ...
-[external] Preparing to unpack .../9-libcap2_1%3a2.66-4+deb12u3+b1_amd64.deb ...
+external] Preparing to unp .../9-libcap2_1%3a2.66-4+deb12u3+b1_amd64.deb ...
 [external] Unpacking libcap2:amd64 (1:2.66-4+deb12u3+b1) over (1:2.66-4) ...
 [external] Setting up libcap2:amd64 (1:2.66-4+deb12u3+b1) ...
 [external] Selecting previously unselected package libip4tc2:amd64.
@@ -248,11 +248,11 @@ System Init
 [external] 
 [external] Creating config file /etc/ssh/sshd_config with new version
 [external] Creating SSH2 RSA key; this may take some time ...
-[external] 3072 SHA256:WqNZ6xql0q4WH8Jq1a35URVzugFmJRoYMsbyzNEi00Y root@instance (RSA)
+[external] 3072 SHA256:e584T04SDQajNeftP4qASqgab4T2J8rMVSq5aVbTTeQ root@instance (RSA)
 [external] Creating SSH2 ECDSA key; this may take some time ...
-[external] 256 SHA256:uUqR1TqZLY+ZzxWggfpYvT7k8tyA+dqqRathbRofjSk root@instance (ECDSA)
+[external] 256 SHA256:G62mN5chNQ0mzlNJRehTu1vAfI0+0HCFuZZNfv5aZTo root@instance (ECDSA)
 [external] Creating SSH2 ED25519 key; this may take some time ...
-[external] 256 SHA256:HpZd2BCnj2g5dTSNre6IUV6ztCeCrS9v4bSmcLj6ppc root@instance (ED25519)
+[external] 256 SHA256:iD+Wa4sehQ7DFukmg/tclGtgA8gO5j1GYkbJb1vKBTE root@instance (ED25519)
 [external] invoke-rc.d: could not determine current runlevel
 [external] invoke-rc.d: policy-rc.d denied execution of start.
 [external] Created symlink /etc/systemd/system/sshd.service → /lib/systemd/system/ssh.service.
@@ -317,15 +317,17 @@ System Init
 [external] Disable system first boot wizard
 [external] Created symlink /etc/systemd/system/systemd-firstboot.service → /dev/null.
 [external] Linking systemd to init
+[external] [E2B-DEBUG] Installing diagnostics: forward journal to console + verbose networkd
+[external] [E2B-DEBUG] Diagnostics installed
 [external] Unlocking immutable configuration
 [external] Finished provisioning script
 E2B_PROVISIONING_EXIT:0
-2026-06-16T21:01:03.998630837 [anonymous-instance:fc_api] The API server received a Patch request on "/vm" with body "{\"state\":\"Paused\"}\n".
-2026-06-16T21:01:03.998698375 [anonymous-instance:main] 'pause vm' VMM action took 36 us.
-2026-06-16T21:01:03.998726314 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:01:03.998732006 [anonymous-instance:fc_api] 'pause vm' API request took 111 us.
-2026-06-16T21:01:03.999759128 [anonymous-instance:fc_api] The API server received a Put request on "/snapshot/create" with body "{\"snapshot_path\":\"/media/nvme/wh/E2B/e2b-infra/packages/orchestrator/tmp/template/acffdf81-996c-4042-9f06-618ed5d224e8/cache/72c8e726-6315-4649-9e82-e01324df1651/snapfile\",\"snapshot_type\":\"Full\"}\n".
-2026-06-16T21:01:03.999780870 [anonymous-instance:main] [DevPreview] Virtual machine snapshots is in development preview.
-2026-06-16T21:01:04.031077140 [anonymous-instance:main] 'create full snapshot' VMM action took 31260 us.
-2026-06-16T21:01:04.031107416 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
-2026-06-16T21:01:04.031113524 [anonymous-instance:fc_api] 'create full snapshot' API request took 31361 us.
+2026-06-16T21:33:22.471632836 [anonymous-instance:fc_api] The API server received a Patch request on "/vm" with body "{\"state\":\"Paused\"}\n".
+2026-06-16T21:33:22.471713561 [anonymous-instance:main] 'pause vm' VMM action took 38 us.
+2026-06-16T21:33:22.471741893 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.471746978 [anonymous-instance:fc_api] 'pause vm' API request took 123 us.
+2026-06-16T21:33:22.472378970 [anonymous-instance:fc_api] The API server received a Put request on "/snapshot/create" with body "{\"snapshot_path\":\"/media/nvme/wh/E2B/e2b-infra/packages/orchestrator/tmp/template/9fcb6a22-dd5e-46a2-90ee-15aa0257a664/cache/7898e2ef-77e7-4ba0-a081-e482b8015c82/snapfile\",\"snapshot_type\":\"Full\"}\n".
+2026-06-16T21:33:22.472398425 [anonymous-instance:main] [DevPreview] Virtual machine snapshots is in development preview.
+2026-06-16T21:33:22.501459087 [anonymous-instance:main] 'create full snapshot' VMM action took 29022 us.
+2026-06-16T21:33:22.501489962 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.501495665 [anonymous-instance:fc_api] 'create full snapshot' API request took 29124 us.

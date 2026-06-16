@@ -1,0 +1,312 @@
+2026-06-16T21:33:22.607225809 [anonymous-instance:main] Running Firecracker v1.12.1
+2026-06-16T21:33:22.608111596 [anonymous-instance:main] Listening on API socket ("/tmp/fc-bo0sbi78mgaomgvbeck31-ta8ld2mckxnzh0rkdldk.sock").
+2026-06-16T21:33:22.608336332 [anonymous-instance:fc_api] API server started.
+2026-06-16T21:33:22.616676069 [anonymous-instance:fc_api] The API server received a Put request on "/metrics" with body "{\"metrics_path\":\"/tmp/fc-metrics-bo0sbi78mgaomgvbeck31-ta8ld2mckxnzh0rkdldk.fifo\"}\n".
+2026-06-16T21:33:22.616725144 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.617939011 [anonymous-instance:fc_api] The API server received a Put request on "/boot-source" with body "{\"boot_args\":\"clocksource=kvm-clock console=ttyS0 i8042.noaux i8042.nokbd init=/sbin/init ip=169.254.0.21::169.254.0.22:255.255.255.252:instance:eth0:off:tap0 ipv6.autoconf=1 ipv6.disable=0 loglevel=5 panic=1 pci=off random.trust_cpu=on reboot=k rootflags=discard\",\"kernel_image_path\":\"/fc-vm/vmlinux-6.1.158/vmlinux.bin\"}\n".
+2026-06-16T21:33:22.617981264 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.619000402 [anonymous-instance:fc_api] The API server received a Put request on "/drives/rootfs" with body "{\"drive_id\":\"rootfs\",\"io_engine\":\"Sync\",\"is_root_device\":true,\"path_on_host\":\"/fc-vm/rootfs.ext4\"}\n".
+2026-06-16T21:33:22.619066285 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.619460456 [anonymous-instance:fc_api] The API server received a Put request on "/network-interfaces/eth0" with body "{\"guest_mac\":\"02:FC:00:00:00:05\",\"host_dev_name\":\"tap0\",\"iface_id\":\"eth0\"}\n".
+2026-06-16T21:33:22.619705509 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.620066227 [anonymous-instance:fc_api] The API server received a Put request on "/mmds/config" with body "{\"network_interfaces\":[\"eth0\"],\"version\":\"V2\"}\n".
+2026-06-16T21:33:22.620121174 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.620381118 [anonymous-instance:fc_api] The API server received a Put request on "/machine-config" with body "{\"huge_pages\":\"2M\",\"mem_size_mib\":512,\"smt\":true,\"track_dirty_pages\":false,\"vcpu_count\":2}\n".
+2026-06-16T21:33:22.620398994 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.620774631 [anonymous-instance:fc_api] The API server received a Put request on "/entropy" with body "{\"rate_limiter\":{\"bandwidth\":{\"one_time_burst\":0,\"refill_time\":100,\"size\":1024}}}\n".
+2026-06-16T21:33:22.620818895 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+2026-06-16T21:33:22.621057331 [anonymous-instance:fc_api] The API server received a Put request on "/actions" with body "{\"action_type\":\"InstanceStart\"}\n".
+2026-06-16T21:33:22.643858086 [anonymous-instance:main] Artificially kick devices.
+2026-06-16T21:33:22.643895546 [anonymous-instance:fc_vcpu 0] Received a VcpuEvent::Resume message with immediate_exit enabled. immediate_exit was disabled before proceeding
+2026-06-16T21:33:22.643916072 [anonymous-instance:fc_vcpu 1] Received a VcpuEvent::Resume message with immediate_exit enabled. immediate_exit was disabled before proceeding
+2026-06-16T21:33:22.643945494 [anonymous-instance:fc_api] The request was executed successfully. Status code: 204 No Content.
+[    0.008112] SELinux: CONFIG_SECURITY_SELINUX_CHECKREQPROT_VALUE is non-zero.  This is deprecated and will be rejected in a future kernel release.
+[    0.008112] SELinux: https://github.com/SELinuxProject/selinux-kernel/wiki/DEPRECATE-checkreqprot
+[    0.041450] EXT4-fs (vda): mounting with "discard" option, but the device does not support discard
+SELinux:  Could not open policy file <= /etc/selinux/targeted/policy/policy.33:  No such file or directory
+
+Welcome to [1mDebian GNU/Linux 12 (bookworm)[0m!
+
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-getty.slice[0m - Slice /system/getty.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-modpr…lice[0m - Slice /system/modprobe.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-ask-passwo…quests to Console Directory Watch.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-ask-passwo… Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Set up automount [0;1;39mproc-sys-…rmats File System Automount Point.
+[[0;32m  OK  [0m] Reached target [0;1;39mcryptsetup.…get[0m - Local Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mintegrityse…Local Integrity Protected Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mslices.target[0m - Slice Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mswap.target[0m - Swaps.
+[[0;32m  OK  [0m] Reached target [0;1;39mtime-set.target[0m - System Time Set.
+[[0;32m  OK  [0m] Reached target [0;1;39mveritysetup… - Local Verity Protected Volumes.
+[[0;32m  OK  [0m] Listening on [0;1;39mrpcbind.socke… RPCbind Server Activation Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-initc… initctl Compatibility Named Pipe.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-journ…socket[0m - Journal Audit Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-journ…t[0m - Journal Socket (/dev/log).
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-journald.socket[0m - Journal Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-netwo… - Network Service Netlink Socket.
+         Mounting [0;1;39mdev-hugepages.mount[0m - Huge Pages File System...
+         Mounting [0;1;39mdev-mqueue.mount…POSIX Message Queue File System...
+         Mounting [0;1;39msys-kernel-debug.…[0m - Kernel Debug File System...
+         Starting [0;1;39mmodprobe@configfs…m - Load Kernel Module configfs...
+         Starting [0;1;39mmodprobe@dm_mod.s…[0m - Load Kernel Module dm_mod...
+         Starting [0;1;39mmodprobe@efi_psto…- Load Kernel Module efi_pstore...
+         Starting [0;1;39mmodprobe@fuse.ser…e[0m - Load Kernel Module fuse...
+         Starting [0;1;39mmodprobe@loop.ser…e[0m - Load Kernel Module loop...
+         Starting [0;1;39mnftables.service[0m - nftables...
+         Starting [0;1;39msystemd-journald.service[0m - Journal Service...
+         Starting [0;1;39msystemd-modules-l…rvice[0m - Load Kernel Modules...
+         Starting [0;1;39msystemd-network-g… units from Kernel command line...
+         Starting [0;1;39msystemd-remount-f…nt Root and Kernel File Systems...
+[[0;32m  OK  [0m] Mounted [0;1;39mdev-hugepages.mount[0m - Huge Pages File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mdev-mqueue.mount[…- POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-debug.m…nt[0m - Kernel Debug File System.
+[[0;32m  OK  [0m] Finished [0;1;39mmodprobe@configfs…[0m - Load Kernel Module configfs.
+[[0;32m  OK  [0m] Finished [0;1;39mmodprobe@dm_mod.s…e[0m - Load Kernel Module dm_mod.
+[[0;32m  OK  [0m] Finished [0;1;39mmodprobe@efi_psto…m - Load Kernel Module efi_pstore.
+[[0;32m  OK  [0m] Finished [0;1;39mmodprobe@fuse.service[0m - Load Kernel Module fuse.
+[[0;32m  OK  [0m] Finished [0;1;39mmodprobe@loop.service[0m - Load Kernel Module loop.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-modules-l…service[0m - Load Kernel Modules.
+[    0.274734] systemd[1]: systemd-network-generator.service: Failed with result 'exit-code'.
+[    0.275162] systemd[1]: Failed to start systemd-network-generator.service - Generate network units from Kernel command line.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39msystemd-ne…rk units from Kernel command line.
+See 'systemctl status systemd-network-generator.service' for details.
+         Mounting [0;1;39msys-fs-fuse-conne…[0m - FUSE Control File System...
+         Starting [0;1;39msystemd-sysctl.se…ce[0m - Apply Kernel Variables...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-remount-f…ount Root and Kernel File Systems.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-fs-fuse-connec…nt[0m - FUSE Control File System.
+         Starting [0;1;39msystemd-random-se…ice[0m - Load/Save Random Seed...
+         Starting [0;1;39msystemd-sysusers.…rvice[0m - Create System Users...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-journald.service[0m - Journal Service.
+         Starting [0;1;39me2b-netdebug.serv… E2B network state dump (debug)...
+         Starting [0;1;39msystemd-journal-f…h Journal to Persistent Storage...
+[    0.289528] (modprobe)[273]: modprobe@configfs.service: Executable /sbin/modprobe missing, skipping: No such file or directory
+[    0.295980] (modprobe)[274]: modprobe@dm_mod.service: Executable /sbin/modprobe missing, skipping: No such file or directory
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-random-se…rvice[0m - Load/Save Random Seed.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mnftables.service[0m - nftables.
+See 'systemctl status nftables.service' for details.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysusers.service[0m - Create System Users.
+[[0;32m  OK  [0m] Reached target [0;1;39mfirst-boot-….target[0m - First Boot Complete.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork-pre…get[0m - Preparation for Network.
+         Starting [0;1;39msystemd-networkd.…ice[0m - Network Configuration...
+         Starting [0;1;39msystemd-tmpfiles-…ate Static Device Nodes in /dev...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-journal-f…ush Journal to Persistent Storage.
+[    0.306981] (modprobe)[275]: modprobe@efi_pstore.service: Executable /sbin/modprobe missing, skipping: No such file or directory
+[[0;32m  OK  [0m] Finished [0;1;39me2b-netdebug.serv… - E2B network state dump (debug).
+[    0.314757] (modprobe)[276]: modprobe@fuse.service: Executable /sbin/modprobe missing, skipping: No such file or directory
+[    0.315657] (modprobe)[277]: modprobe@loop.service: Executable /sbin/modprobe missing, skipping: No such file or directory
+[    0.316458] systemd-network-generator[281]: Failed to parse kernel command line: Invalid argument
+[    0.317122] systemd[1]: Starting e2b-netdebug.service - E2B network state dump (debug)...
+[    0.318023] systemd[1]: Starting systemd-journal-flush.service - Flush Journal to Persistent Storage...
+[    0.318834] systemd[1]: Finished systemd-random-seed.service - Load/Save Random Seed.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39msystemd-ne…rvice[0m - Network Configuration.
+See 'systemctl status systemd-networkd.service' for details.
+[    0.319457] nft[278]: /etc/nftables.conf:5:1-2: Error: Could not process rule: Operation not supported
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-…reate Static Device Nodes in /dev.
+[    0.321142] nft[278]: table inet filter {
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs-pr…reparation for Local File Systems.
+[    0.321786] nft[278]: ^^
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs.target[0m - Local File Systems.
+[    0.322337] nft[278]: /etc/nftables.conf:5:12-17: Error: No such file or directory; did you mean chain ‘input’ in table inet ‘filter’?
+         Starting [0;1;39msystemd-binfmt.se…et Up Additional Binary Formats...
+[    0.323363] nft[278]: table inet filter {
+         Starting [0;1;39msystemd-machine-i… a transient machine-id on disk...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-networkd.service[0m - Network Configuration.
+         Starting [0;1;39msystemd-networkd.…ice[0m - Network Configuration...
+         Starting [0;1;39msystemd-tmpfiles-…te System Files and Directories...
+[    0.330349] nft[278]:            ^^^^^^
+[    0.330758] nft[278]: /etc/nftables.conf:5:12-17: Error: No such file or directory; did you mean chain ‘forward’ in table inet ‘filter’?
+[    0.331603] nft[278]: table inet filter {
+[    0.331934] nft[278]:            ^^^^^^
+[    0.332297] nft[278]: /etc/nftables.conf:5:12-17: Error: No such file or directory; did you mean chain ‘output’ in table inet ‘filter’?
+[    0.333192] nft[278]: table inet filter {
+[    0.333547] nft[278]:            ^^^^^^
+[    0.333982] systemd[1]: nftables.service: Main process exited, code=exited, status=1/FAILURE
+[    0.335782] systemd[1]: nftables.service: Failed with result 'exit-code'.
+[    0.336466] systemd[1]: Failed to start nftables.service - nftables.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-…eate System Files and Directories.
+[    0.340357] systemd[1]: Finished systemd-sysctl.service - Apply Kernel Variables.
+[    0.341447] systemd[1]: Finished systemd-sysusers.service - Create System Users.
+[    0.341948] systemd[1]: Reached target first-boot-complete.target - First Boot Complete.
+[    0.342415] systemd[1]: Reached target network-pre.target - Preparation for Network.
+[    0.342871] systemd[1]: Starting systemd-networkd.service - Network Configuration...
+         Starting [0;1;39mrpcbind.service[0m - RPC bind portmap service...
+         Starting [0;1;39msystemd-update-ut…rd System Boot/Shutdown in UTMP...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-machine-i…it a transient machine-id on disk.
+[    0.343613] sh[290]: ===E2B-DEBUG ip addr===
+[    0.345395] systemd[1]: Starting systemd-tmpfiles-setup-dev.service - Create Static Device Nodes in /dev...
+[    0.346262] sh[292]: 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+[    0.346853] sh[292]:     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+[    0.347277] sh[292]:     inet 127.0.0.1/8 scope host lo
+[    0.347556] sh[292]:        valid_lft forever preferred_lft forever
+[    0.348350] sh[292]:     inet6 ::1/128 scope host
+[    0.348671] sh[292]:        valid_lft forever preferred_lft forever
+[    0.349041] sh[292]: 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+[    0.349656] sh[292]:     link/ether 02:fc:00:00:00:05 brd ff:ff:ff:ff:ff:ff
+[    0.350064] sh[292]:     inet 169.254.0.21/30 brd 169.254.0.23 scope global eth0
+[    0.350477] sh[292]:        valid_lft forever preferred_lft forever
+[    0.350805] sh[292]:     inet6 fe80::fc:ff:fe00:5/64 scope link tentative
+[    0.351249] sh[292]:        valid_lft forever preferred_lft forever
+[    0.351696] (networkd)[294]: systemd-networkd.service: Failed to connect stdout to the journal socket, ignoring: Permission denied
+[    0.352961] sh[290]: ===E2B-DEBUG ip route===
+[    0.353458] systemd[1]: Finished systemd-journal-flush.service - Flush Journal to Persistent Storage.
+[    0.354098] sh[293]: default via 169.254.0.22 dev eth0
+[    0.354385] sh[293]: 169.254.0.20/30 dev eth0 proto kernel scope link src 169.254.0.21
+[    0.354790] systemd[1]: Finished e2b-netdebug.service - E2B network state dump (debug).
+[    0.355281] sh[290]: ===E2B-DEBUG resolv.conf===
+[    0.355546] systemd[1]: systemd-networkd.service: Main process exited, code=exited, status=200/CHDIR
+[[0;1;31mFAILED[0m] Failed to start [0;1;39msystemd-ne…rvice[0m - Network Configuration.
+See 'systemctl status systemd-networkd.service' for details.
+[    0.357184] sh[295]: nameserver 8.8.8.8
+[    0.357451] sh[295]: nameserver 223.6.6.6
+[    0.357707] systemd[1]: systemd-networkd.service: Failed with result 'exit-code'.
+[    0.358192] sh[295]: options use-vc timeout:2 attempts:3
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-networkd.service[0m - Network Configuration.
+[    0.358513] sh[290]: ===E2B-DEBUG entropy_avail===
+[    0.359223] systemd[1]: Failed to start systemd-networkd.service - Network Configuration.
+[    0.359774] sh[299]: 256
+[    0.359973] systemd[1]: Finished systemd-tmpfiles-setup-dev.service - Create Static Device Nodes in /dev.
+[    0.360535] systemd[1]: systemd-networkd.service: Scheduled restart job, restart counter is at 1.
+[    0.361024] systemd[1]: Reached target local-fs-pre.target - Preparation for Local File Systems.
+[    0.361517] systemd[1]: Reached target local-fs.target - Local File Systems.
+[    0.361910] systemd[1]: Starting systemd-binfmt.service - Set Up Additional Binary Formats...
+[    0.362374] systemd[1]: Starting systemd-machine-id-commit.service - Commit a transient machine-id on disk...
+[    0.362902] systemd[1]: Stopped systemd-networkd.service - Network Configuration.
+[    0.363326] systemd[1]: Starting systemd-networkd.service - Network Configuration...
+[    0.363795] (networkd)[302]: systemd-networkd.service: Failed to connect stdout to the journal socket, ignoring: Permission denied
+[    0.364425] systemd[1]: systemd-sysext.service - Merge System Extension Images into /usr/ and /opt/ was skipped because no trigger condition checks were met.
+[    0.365147] systemd[1]: Starting systemd-tmpfiles-setup.service - Create System Files and Directories...
+[    0.365657] systemd[1]: proc-sys-fs-binfmt_misc.automount: Got automount request for /proc/sys/fs/binfmt_misc, triggered by 300 (systemd-binfmt)
+[    0.366329] systemd[1]: Finished systemd-tmpfiles-setup.service - Create System Files and Directories.
+[    0.366827] systemd[1]: Starting rpcbind.service - RPC bind portmap service...
+[    0.367234] systemd[1]: Starting systemd-update-utmp.service - Record System Boot/Shutdown in UTMP...
+[    0.367732] systemd[1]: Finished systemd-machine-id-commit.service - Commit a transient machine-id on disk.
+[    0.368277] systemd[1]: systemd-networkd.service: Main process exited, code=exited, status=200/CHDIR
+[    0.368784] systemd[1]: systemd-networkd.service: Failed with result 'exit-code'.
+[    0.369205] systemd[1]: Failed to start systemd-networkd.service - Network Configuration.
+[    0.369650] systemd[1]: systemd-networkd.service: Scheduled restart job, restart counter is at 2.
+[    0.370134] systemd[1]: Stopped systemd-networkd.service - Network Configuration.
+         Starting [0;1;39msystemd-networkd.…ice[0m - Network Configuration...
+[    0.380968] (networkd)[308]: systemd-networkd.service: Failed to connect stdout to the journal socket, ignoring: Permission denied
+[    0.381807] systemd[1]: Starting systemd-networkd.service - Network Configuration...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-update-ut…cord System Boot/Shutdown in UTMP.
+[    0.382696] systemd[1]: Finished systemd-update-utmp.service - Record System Boot/Shutdown in UTMP.
+[    1.266195] systemd[1]: etc-machine\x2did.mount: Deactivated successfully.
+         Mounting [0;1;39mproc-sys-fs-binfm…utable File Formats File System...
+         Mounting [0;1;39mrun-rpc_pipefs.mount[0m - RPC Pipe File System...
+[[0;32m  OK  [0m] Mounted [0;1;39mproc-sys-fs-binfmt…ecutable File Formats File System.
+[    1.288261] systemd[1]: Mounting proc-sys-fs-binfmt_misc.mount - Arbitrary Executable File Formats File System...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-binfmt.se… Set Up Additional Binary Formats.
+[[0;32m  OK  [0m] Mounted [0;1;39mrun-rpc_pipefs.mount[0m - RPC Pipe File System.
+[    1.292451] systemd[1]: Mounting run-rpc_pipefs.mount - RPC Pipe File System...
+[[0;32m  OK  [0m] Reached target [0;1;39mrpc_pipefs.target[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-tmpfiles-c… Cleanup of Temporary Directories.
+[    1.295183] systemd[1]: Mounted proc-sys-fs-binfmt_misc.mount - Arbitrary Executable File Formats File System.
+[[0;32m  OK  [0m] Listening on [0;1;39mssh.socket[0…penBSD Secure Shell server socket.
+[[0;32m  OK  [0m] Reached target [0;1;39msockets.target[0m - Socket Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mnfs-client.target[0m - NFS client services.
+[[0;32m  OK  [0m] Reached target [0;1;39mbasic.target[0m - Basic System.
+[    1.297621] systemd[1]: Finished systemd-binfmt.service - Set Up Additional Binary Formats.
+[    1.298705] systemd[1]: Mounted run-rpc_pipefs.mount - RPC Pipe File System.
+         Starting [0;1;39me2scrub_reap.serv…e ext4 Metadata Check Snapshots...
+[    1.304530] systemd[1]: Reached target rpc_pipefs.target.
+[    1.304943] systemd[1]: Reached target sysinit.target - System Initialization.
+         Starting [0;1;39mgetty-static.serv…us and logind are not available...
+[    1.305891] systemd[1]: Started systemd-tmpfiles-clean.timer - Daily Cleanup of Temporary Directories.
+[    1.306553] systemd[1]: Listening on ssh.socket - OpenBSD Secure Shell server socket.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39msystemd-ne…rvice[0m - Network Configuration.
+See 'systemctl status systemd-networkd.service' for details.
+[    1.308664] systemd[1]: Reached target sockets.target - Socket Units.
+[    1.309747] systemd[1]: rpc-gssd.service - RPC security service for NFS client and server was skipped because of an unmet condition check (ConditionPathExists=/etc/krb5.keytab).
+[    1.310571] systemd[1]: Reached target nfs-client.target - NFS client services.
+[    1.310968] systemd[1]: systemd-pcrphase-sysinit.service - TPM2 PCR Barrier (Initialization) was skipped because of an unmet condition check (ConditionPathExists=/sys/firmware/efi/efivars/StubPcrKernelImage-4a67b082-0a4c-41cf-b6c7-440b29bb8c4f).
+[    1.312253] systemd[1]: Reached target basic.target - Basic System.
+[    1.312612] systemd[1]: Starting e2scrub_reap.service - Remove Stale Online ext4 Metadata Check Snapshots...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-networkd.service[0m - Network Configuration.
+[    1.313155] systemd[1]: Starting getty-static.service - getty on tty2-tty6 if dbus and logind are not available...
+[    1.314099] systemd[1]: systemd-logind.service - User Login Management was skipped because no trigger condition checks were met.
+[    1.314689] systemd[1]: systemd-networkd.service: Main process exited, code=exited, status=200/CHDIR
+[    1.315161] systemd[1]: systemd-networkd.service: Failed with result 'exit-code'.
+[    1.315557] systemd[1]: Failed to start systemd-networkd.service - Network Configuration.
+[    1.315982] systemd[1]: systemd-networkd.service: Scheduled restart job, restart counter is at 3.
+[    1.316444] systemd[1]: Stopped systemd-networkd.service - Network Configuration.
+         Starting [0;1;39msystemd-networkd.…ice[0m - Network Configuration...
+[[0;32m  OK  [0m] Finished [0;1;39mgetty-static.serv…dbus and logind are not available.
+[    1.317645] systemd[1]: Starting systemd-networkd.service - Network Configuration...
+[    1.325592] (networkd)[318]: systemd-networkd.service: Failed to connect stdout to the journal socket, ignoring: Permission denied
+[    1.326433] systemd[1]: Finished getty-static.service - getty on tty2-tty6 if dbus and logind are not available.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39msystemd-ne…rvice[0m - Network Configuration.
+[    1.327069] systemd[1]: systemd-networkd.service: Main process exited, code=exited, status=200/CHDIR
+See 'systemctl status systemd-networkd.service' for details.
+[    1.327984] systemd[1]: systemd-networkd.service: Failed with result 'exit-code'.
+[    1.328717] systemd[1]: Failed to start systemd-networkd.service - Network Configuration.
+[    1.329282] systemd[1]: e2scrub_reap.service: Deactivated successfully.
+[[0;32m  OK  [0m] Finished [0;1;39me2scrub_reap.serv…ine ext4 Metadata Check Snapshots.
+[    1.329680] systemd[1]: Finished e2scrub_reap.service - Remove Stale Online ext4 Metadata Check Snapshots.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-networkd.service[0m - Network Configuration.
+[    1.330781] systemd[1]: systemd-networkd.service: Scheduled restart job, restart counter is at 4.
+[    1.331709] systemd[1]: Stopped systemd-networkd.service - Network Configuration.
+         Starting [0;1;39msystemd-networkd.…ice[0m - Network Configuration...
+[    1.333167] systemd[1]: Starting systemd-networkd.service - Network Configuration...
+[    1.334013] (networkd)[322]: systemd-networkd.service: Failed to connect stdout to the journal socket, ignoring: Permission denied
+[    1.342293] systemd[1]: systemd-networkd.service: Main process exited, code=exited, status=200/CHDIR
+[    1.342896] systemd[1]: systemd-networkd.service: Failed with result 'exit-code'.
+[    1.343087] systemd[1]: Failed to start systemd-networkd.service - Network Configuration.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39msystemd-ne…rvice[0m - Network Configuration.
+See 'systemctl status systemd-networkd.service' for details.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-networkd.service[0m - Network Configuration.
+[    1.344637] systemd[1]: systemd-networkd.service: Scheduled restart job, restart counter is at 5.
+[    1.345544] systemd[1]: Stopped systemd-networkd.service - Network Configuration.
+[    1.345963] systemd[1]: systemd-networkd.service: Start request repeated too quickly.
+[    1.346127] systemd[1]: systemd-networkd.service: Failed with result 'exit-code'.
+[    1.346183] systemd[1]: Failed to start systemd-networkd.service - Network Configuration.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39msystemd-ne…rvice[0m - Network Configuration.
+See 'systemctl status systemd-networkd.service' for details.
+[    1.347803] systemd[1]: systemd-networkd.socket: Failed with result 'service-start-limit-hit'.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork.target[0m - Network.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork-online.target[0m - Network is Online.
+[    1.348447] systemd[1]: Reached target network.target - Network.
+[    1.349517] systemd[1]: Reached target network-online.target - Network is Online.
+         Starting [0;1;39mchrony.service[0m - chrony, an NTP client/server...
+         Starting [0;1;39mrpc-statd-notify.…- Notify NFS peers of a restart...
+         Starting [0;1;39mssh.service[0m - OpenBSD Secure Shell server...
+[    1.350531] systemd[1]: Starting chrony.service - chrony, an NTP client/server...
+[[0;32m  OK  [0m] Started [0;1;39mrpc-statd-notify.s…m - Notify NFS peers of a restart.
+[    1.357778] (chronyd)[323]: chrony.service: Failed to connect stdout to the journal socket, ignoring: Permission denied
+[    1.358512] sm-notify[324]: Version 2.6.2 starting
+[    1.358937] systemd[1]: Starting rpc-statd-notify.service - Notify NFS peers of a restart...
+[    1.359602] systemd[1]: Starting ssh.service - OpenBSD Secure Shell server...
+[    1.360253] systemd[1]: Started rpc-statd-notify.service - Notify NFS peers of a restart.
+[[0;32m  OK  [0m] Started [0;1;39mchrony.service[0m - chrony, an NTP client/server.
+         Starting [0;1;39mchrony-wait.servi…ony to synchronize system clock...
+[    1.382544] chronyd[328]: chronyd version 4.3 starting (+CMDMON +NTP +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +ASYNCDNS +NTS +SECHASH +IPV6 -DEBUG)
+[    1.383307] chronyd[328]: Setting filter length for PHC0 to 1
+[    1.383657] systemd[1]: Started chrony.service - chrony, an NTP client/server.
+[    1.384170] chronyd[328]: Could not open command socket on /run/chrony/chronyd.sock
+[    1.385331] systemd[1]: Starting chrony-wait.service - Wait for chrony to synchronize system clock...
+[    1.385969] chronyd[328]: Loaded seccomp filter (level 1)
+[    1.388139] sshd[326]: Server listening on :: port 22.
+[[0;32m  OK  [0m] Started [0;1;39mssh.service[0m - OpenBSD Secure Shell server.
+[    1.389331] systemd[1]: Started ssh.service - OpenBSD Secure Shell server.
+[    1.402009] systemd[1]: chrony-wait.service: Main process exited, code=exited, status=200/CHDIR
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mchrony-wai…hrony to synchronize system clock.
+See 'systemctl status chrony-wait.service' for details.
+[    1.402998] systemd[1]: chrony-wait.service: Failed with result 'exit-code'.
+[[0;32m  OK  [0m] Reached target [0;1;39mtime-sync.t…et[0m - System Time Synchronized.
+[[0;32m  OK  [0m] Started [0;1;39mapt-daily.timer[0m - Daily apt download activities.
+[[0;32m  OK  [0m] Started [0;1;39mapt-daily-upgrade.… apt upgrade and clean activities.
+[[0;32m  OK  [0m] Started [0;1;39mdpkg-db-backup.tim… Daily dpkg database backup timer.
+[[0;32m  OK  [0m] Started [0;1;39me2scrub_all.timer…etadata Check for All Filesystems.
+[[0;32m  OK  [0m] Started [0;1;39mfstrim.timer[0m - Discard unused blocks once a week.
+[[0;32m  OK  [0m] Reached target [0;1;39mtimers.target[0m - Timer Units.
+[    1.406214] systemd[1]: Failed to start chrony-wait.service - Wait for chrony to synchronize system clock.
+[    1.406738] systemd[1]: Reached target time-sync.target - System Time Synchronized.
+[    1.407188] systemd[1]: Started apt-daily.timer - Daily apt download activities.
+[    1.407613] systemd[1]: Started apt-daily-upgrade.timer - Daily apt upgrade and clean activities.
+[    1.408187] systemd[1]: Started dpkg-db-backup.timer - Daily dpkg database backup timer.
+[    1.408648] systemd[1]: Started e2scrub_all.timer - Periodic ext4 Online Metadata Check for All Filesystems.
+[    1.409165] systemd[1]: Started fstrim.timer - Discard unused blocks once a week.
+[    1.409559] systemd[1]: Reached target timers.target - Timer Units.
+[    9.386060] chronyd[328]: Selected source PHC0
