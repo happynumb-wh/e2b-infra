@@ -1,0 +1,1 @@
+BOOT_IMAGE=(hd0,gpt2)/boot/vmlinuz-6.6.1026.6-fix-uffd root=UUID=37506c59-08dc-4976-b3dd-6776a1f7842d ro biosdevname=0 rd.driver.pre=ahci nopat ras=cec_disable iommu=pt console=ttyS0,115200 fsck.repair=yes crashkernel=0M-2G:0M,2G-256G:256M,256G-1024G:320M,1024G-:384M intel_iommu=sm_on,on systemd.unified_cgroup_hierarchy=1
