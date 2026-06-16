@@ -218,10 +218,26 @@ func (p *Process) configure(
 	ctx, childSpan := tracer.Start(ctx, "configure-fc")
 	defer childSpan.End()
 
+	// DEBUG: tee raw Firecracker stdout+stderr (incl. guest kernel serial
+	// console) to a dedicated per-sandbox file so guest boot can be inspected
+	// when envd never comes up. Unfiltered on purpose.
+	var consoleFile *os.File
+	if cf, ferr := os.Create(fmt.Sprintf("/tmp/fc-console-%s.log", p.files.SandboxID)); ferr == nil {
+		consoleFile = cf
+		logger.L().Info(ctx, "fc guest console log",
+			zap.String("path", cf.Name()),
+			logger.WithSandboxID(p.files.SandboxID))
+	} else {
+		logger.L().Warn(ctx, "failed to create fc console log file", zap.Error(ferr))
+	}
+
 	stdoutWriter := &zapio.Writer{Log: sbxlogger.I(sbxMetadata).Logger.Detach(ctx), Level: zap.InfoLevel}
 	stdoutWriters := []io.Writer{stdoutWriter}
 	if stdoutExternal != nil {
 		stdoutWriters = append(stdoutWriters, stdoutExternal)
+	}
+	if consoleFile != nil {
+		stdoutWriters = append(stdoutWriters, consoleFile)
 	}
 	p.cmd.Stdout = &fcLogFilter{w: io.MultiWriter(stdoutWriters...)}
 
@@ -229,6 +245,9 @@ func (p *Process) configure(
 	stderrWriters := []io.Writer{stderrWriter}
 	if stderrExternal != nil {
 		stderrWriters = append(stderrWriters, stderrExternal)
+	}
+	if consoleFile != nil {
+		stderrWriters = append(stderrWriters, consoleFile)
 	}
 	p.cmd.Stderr = io.MultiWriter(stderrWriters...)
 
@@ -261,6 +280,9 @@ func (p *Process) configure(
 	go func() {
 		defer stderrWriter.Close()
 		defer stdoutWriter.Close()
+		if consoleFile != nil {
+			defer consoleFile.Close()
+		}
 
 		waitErr := p.cmd.Wait()
 		if waitErr != nil {
