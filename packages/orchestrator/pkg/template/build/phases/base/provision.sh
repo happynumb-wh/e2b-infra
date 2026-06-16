@@ -110,6 +110,55 @@ rm -rf /etc/machine-id
 echo "Linking systemd to init"
 ln -sf /lib/systemd/systemd /usr/sbin/init
 
+# ==================== E2B DEBUG (临时排查 networkd/rpcbind hang) ====================
+echo "[E2B-DEBUG] Installing diagnostics: forward journal to console + verbose networkd"
+
+# 1) 把 journald 的全部日志转发到 console(=ttyS0 → fc-console 文件),含 debug 级别
+#    这样 networkd 失败原因、rpcbind 卡在等什么,都会直接打到 console。
+mkdir -p /etc/systemd/journald.conf.d
+cat <<EOF >/etc/systemd/journald.conf.d/zz-e2b-debug.conf
+[Journal]
+ForwardToConsole=yes
+MaxLevelConsole=debug
+EOF
+
+# 2) systemd-networkd 开 debug 日志(看它每次失败的具体原因)
+mkdir -p /etc/systemd/system/systemd-networkd.service.d
+cat <<EOF >/etc/systemd/system/systemd-networkd.service.d/zz-e2b-debug.conf
+[Service]
+Environment=SYSTEMD_LOG_LEVEL=debug
+StandardOutput=journal+console
+StandardError=journal+console
+EOF
+
+# 3) rpcbind 把自身输出也打到 console(看它卡在哪个系统调用/等待)
+mkdir -p /etc/systemd/system/rpcbind.service.d
+cat <<EOF >/etc/systemd/system/rpcbind.service.d/zz-e2b-debug.conf
+[Service]
+StandardOutput=journal+console
+StandardError=journal+console
+EOF
+
+# 4) 一个尽早运行、且不被 rpcbind 阻塞的诊断服务:开机就把网络状态打到 console
+cat <<EOF >/etc/systemd/system/e2b-netdebug.service
+[Unit]
+Description=E2B network state dump (debug)
+DefaultDependencies=no
+After=systemd-journald.service
+Before=sysinit.target
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+StandardOutput=journal+console
+StandardError=journal+console
+ExecStart=/bin/sh -c 'echo "===E2B-DEBUG ip addr==="; ip addr; echo "===E2B-DEBUG ip route==="; ip route; echo "===E2B-DEBUG resolv.conf==="; cat /etc/resolv.conf; echo "===E2B-DEBUG entropy_avail==="; cat /proc/sys/kernel/random/entropy_avail'
+[Install]
+WantedBy=sysinit.target
+EOF
+ln -sf /etc/systemd/system/e2b-netdebug.service /etc/systemd/system/sysinit.target.wants/e2b-netdebug.service
+echo "[E2B-DEBUG] Diagnostics installed"
+# ==================== E2B DEBUG END ====================
+
 echo "Unlocking immutable configuration"
 $BUSYBOX chattr -i /etc/resolv.conf
 
