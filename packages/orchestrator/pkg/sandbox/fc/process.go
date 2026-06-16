@@ -412,6 +412,11 @@ func (p *Process) Create(
 		delete(args, "quiet")
 		args["console"] = "ttyS0"
 		args["loglevel"] = "5" // KERN_NOTICE
+
+		// E2B DEBUG: make PID1 systemd verbose so the real reason behind
+		// service exec failures (e.g. 200/CHDIR) is printed to the console.
+		args["systemd.log_level"] = "debug"
+		args["systemd.log_target"] = "console"
 	}
 
 	kernelArgs := args.String()
