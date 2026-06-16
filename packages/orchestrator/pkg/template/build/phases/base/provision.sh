@@ -6,6 +6,26 @@ RESULT_PATH="{{ .ResultPath }}"
 
 echo "Starting provisioning script"
 
+# ==================== E2B DEBUG: 非 root 访问失败排查 ====================
+echo "===E2B-DBG id-root=== $(id)"
+echo "===E2B-DBG umask=== $(umask)"
+echo "===E2B-DBG _apt-user=== $(id _apt 2>&1)"
+echo "===E2B-DBG mounts==="
+cat /proc/mounts | grep -E " / |/var|/run|/tmp" | head
+echo "===E2B-DBG rootfs-fs-feat==="
+mount | grep " / " | head
+echo "===E2B-DBG own:apt-dirs==="
+ls -ldn /var /var/lib /var/lib/apt /var/lib/apt/lists /var/lib/apt/lists/partial /var/cache/apt /var/cache/apt/archives /var/cache/apt/archives/partial 2>&1
+echo "===E2B-DBG own:run-systemd==="
+ls -ldn /run /lib/systemd /lib/systemd/systemd 2>&1
+echo "===E2B-DBG own:usr-bin-ls==="
+ls -ln /usr/bin/ls /bin/sh 2>&1
+echo "===E2B-DBG drop-priv-test (as _apt)==="
+# 模拟 apt 降权:以 _apt 身份访问 partial 目录,抓真实 errno
+su -s /bin/sh _apt -c 'cd /var/lib/apt/lists/partial 2>&1 && echo CD-OK || echo CD-FAIL; ls /var/lib/apt/lists/partial 2>&1; id' 2>&1 | head
+echo "===E2B-DBG drop-priv-test END==="
+# ==================== E2B DEBUG END ====================
+
 {{ if eq .Provider "gcp" }}
 # GCP Specific logic
 {{ end }}
