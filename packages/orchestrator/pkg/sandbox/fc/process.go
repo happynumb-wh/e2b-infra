@@ -397,6 +397,12 @@ func (p *Process) Create(
 
 		// discard: ext4 issues TRIM on freed blocks so they are elided from the snapshot diff.
 		"rootflags": "discard",
+
+		// Force guest systemd to use the unified cgroup v2 hierarchy.
+		// On some hosts the guest otherwise comes up in a hybrid/v1 cgroup
+		// layout that breaks systemd service setup (exit 200/CHDIR, journal
+		// socket Permission denied) -> rpcbind stalls -> envd never starts.
+		"systemd.unified_cgroup_hierarchy": "1",
 	}
 
 	if options.KvmClock {
