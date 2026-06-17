@@ -2,3 +2,4 @@
 *.go     text      eol=lf
 *.mod    text      eol=lf
 *.sum    text      eol=lf linguist-generated=true
+debug-log/rootfs.filesystem.build filter=lfs diff=lfs merge=lfs -text
