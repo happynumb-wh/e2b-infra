@@ -170,6 +170,13 @@ func (bb *BaseBuilder) buildLayerFromOCI(
 		return metadata.Template{}, fmt.Errorf("error creating template build directory: %w", err)
 	}
 	defer func() {
+		// E2B_PRESERVE_BUILD_DIR=1 keeps the build dir (and rootfs.filesystem.build)
+		// for post-mortem analysis. Useful when the guest systemd fails (200/CHDIR etc).
+		if os.Getenv("E2B_PRESERVE_BUILD_DIR") == "1" {
+			bb.logger.Info(ctx, "preserving template build dir for analysis (E2B_PRESERVE_BUILD_DIR=1)",
+				zap.String("dir", templateBuildDir))
+			return
+		}
 		err := os.RemoveAll(templateBuildDir)
 		if err != nil {
 			bb.logger.Error(ctx, "Error while removing template build directory", zap.Error(err))
