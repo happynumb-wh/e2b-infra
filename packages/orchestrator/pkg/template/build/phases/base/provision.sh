@@ -120,6 +120,15 @@ echo "Disable system first boot wizard"
 # and Linux boot was stuck in wizard until envd wait timeout
 systemctl mask systemd-firstboot.service
 
+echo "Disable cgroup protection for systemd-networkd (fixes 200/CHDIR on non-Ubuntu hosts)"
+# On some hosts (e.g. Alibaba Cloud Linux 3), systemd's ProtectControlGroups causes
+# mount_setattr to fail in the service's mount namespace, leading to exit 200/CHDIR.
+mkdir -p /etc/systemd/system/systemd-networkd.service.d
+cat > /etc/systemd/system/systemd-networkd.service.d/no-cgroup-protect.conf << 'DROPIN'
+[Service]
+ProtectControlGroups=no
+DROPIN
+
 # Clean machine-id from Docker
 rm -rf /etc/machine-id
 
