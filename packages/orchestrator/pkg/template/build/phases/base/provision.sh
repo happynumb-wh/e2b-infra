@@ -18,6 +18,12 @@ cat /proc/mounts 2>&1 | grep -E " / |/var|/run|/tmp" | head
 echo "===E2B-DBG own:run-systemd==="
 ls -ldn /run /lib/systemd /lib/systemd/systemd 2>&1 | head
 echo "===E2B-DBG systemd-version=== $(/lib/systemd/systemd --version 2>&1 | head -1)"
+echo "===E2B-DBG cgroup2-mountinfo==="
+cat /proc/self/mountinfo | grep cgroup2
+echo "===E2B-DBG cgroup2-subtree==="
+cat /sys/fs/cgroup/cgroup.subtree_control 2>/dev/null || echo "N/A"
+echo "===E2B-DBG cgroup2-self==="
+cat /proc/self/cgroup 2>/dev/null | head -3
 } 2>&1 || true
 echo "===E2B-DBG block END==="
 # ==================== E2B DEBUG END ====================

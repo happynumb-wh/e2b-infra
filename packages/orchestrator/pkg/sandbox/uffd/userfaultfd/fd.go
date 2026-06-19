@@ -23,6 +23,10 @@ struct uffd_pagefault {
 #define UFFD_FEATURE_WP_ASYNC (1 << 15)
 #endif
 
+#ifndef UFFD_PAGEFAULT_FLAG_MINOR
+#define UFFD_PAGEFAULT_FLAG_MINOR (1 << 1)
+#endif
+
 struct uffd_remove {
 	__u64 start;
 	__u64 end;
