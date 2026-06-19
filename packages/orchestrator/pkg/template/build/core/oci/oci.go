@@ -369,9 +369,11 @@ func copyFiles(ctx context.Context, src, dest string) error {
 	// Device files and special files
 	// Hard links (-H)
 	//
+	// --numeric-ids: Preserve container UID/GID values exactly instead of mapping
+	// names through the host's passwd/group database.
 	// --whole-file: Copy files without using the delta algorithm, which is faster for local copies
 	// --inplace: Update destination files in place, no need to create temporary files
-	cmd := exec.CommandContext(ctx, "rsync", "-aH", "--whole-file", "--inplace", src+"/", dest)
+	cmd := exec.CommandContext(ctx, "rsync", "-aH", "--numeric-ids", "--whole-file", "--inplace", src+"/", dest)
 	// Pin rsync's working directory to root. When template-manager is exec'd
 	// via `nsenter -t 1 -m -u -i -n -w/` into PID 1's namespaces, a child
 	// process's inherited CWD can land on a directory that has been unmounted
