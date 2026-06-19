@@ -428,6 +428,13 @@ func createExport(ctx context.Context, logger logger.Logger, srcImage containerr
 			if err != nil {
 				return fmt.Errorf("failed to create directory for layer %d: %w", i, err)
 			}
+			// os.MkdirAll is affected by the template-manager process umask.
+			// Keep layer roots world-executable so overlayfs does not project a
+			// host umask such as 0077 into the guest root directory.
+			err = os.Chmod(layerPath, 0o755)
+			if err != nil {
+				return fmt.Errorf("failed to chmod layer root for layer %d: %w", i, err)
+			}
 
 			rc, err := l.Uncompressed()
 			if err != nil {

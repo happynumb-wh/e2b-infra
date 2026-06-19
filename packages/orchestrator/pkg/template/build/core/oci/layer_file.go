@@ -6,7 +6,9 @@ import (
 	"archive/tar"
 	"bytes"
 	"io"
+	"path"
 	"slices"
+	"strings"
 
 	containerregistry "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/tarball"
@@ -22,6 +24,10 @@ type File struct {
 func LayerFile(filemap map[string]File) (containerregistry.Layer, error) {
 	b := &bytes.Buffer{}
 	w := tar.NewWriter(b)
+
+	if err := writeParentDirs(w, mapKeys(filemap)); err != nil {
+		return nil, err
+	}
 
 	names := []string{}
 	for f := range filemap {
@@ -57,6 +63,10 @@ func LayerSymlink(symlinks map[string]string) (containerregistry.Layer, error) {
 	b := &bytes.Buffer{}
 	w := tar.NewWriter(b)
 
+	if err := writeParentDirs(w, mapKeys(symlinks)); err != nil {
+		return nil, err
+	}
+
 	names := make([]string, 0, len(symlinks))
 	for name := range symlinks {
 		names = append(names, name)
@@ -82,4 +92,42 @@ func LayerSymlink(symlinks map[string]string) (containerregistry.Layer, error) {
 	return tarball.LayerFromOpener(func() (io.ReadCloser, error) {
 		return io.NopCloser(bytes.NewBuffer(b.Bytes())), nil
 	})
+}
+
+func mapKeys[T any](m map[string]T) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+
+	return keys
+}
+
+func writeParentDirs(w *tar.Writer, names []string) error {
+	dirs := make(map[string]struct{})
+	for _, name := range names {
+		parent := path.Dir(path.Clean(name))
+		for parent != "." && parent != "/" {
+			dirs[parent] = struct{}{}
+			parent = path.Dir(parent)
+		}
+	}
+
+	dirNames := make([]string, 0, len(dirs))
+	for dir := range dirs {
+		dirNames = append(dirNames, dir)
+	}
+	slices.Sort(dirNames)
+
+	for _, dir := range dirNames {
+		if err := w.WriteHeader(&tar.Header{
+			Name:     strings.TrimSuffix(dir, "/") + "/",
+			Typeflag: tar.TypeDir,
+			Mode:     0o755,
+		}); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

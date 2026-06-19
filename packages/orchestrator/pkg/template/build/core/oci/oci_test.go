@@ -23,6 +23,7 @@ import (
 	"github.com/google/go-containerregistry/pkg/v1/tarball"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"golang.org/x/sys/unix"
 
 	"github.com/e2b-dev/infra/packages/orchestrator/pkg/template/build/core/oci/auth"
 	"github.com/e2b-dev/infra/packages/shared/pkg/dockerhub"
@@ -53,6 +54,97 @@ func createFileTar(t *testing.T, fileName string) *bytes.Buffer {
 	tw.Close()
 
 	return &buf
+}
+
+func TestLayerFileWritesParentDirsWithStablePermissions(t *testing.T) {
+	oldUmask := unix.Umask(0o077)
+	t.Cleanup(func() {
+		unix.Umask(oldUmask)
+	})
+
+	layer, err := LayerFile(map[string]File{
+		"usr/local/bin/provision.sh": {Bytes: []byte("#!/bin/sh\n"), Mode: 0o755},
+	})
+	require.NoError(t, err)
+
+	rc, err := layer.Uncompressed()
+	require.NoError(t, err)
+	defer rc.Close()
+
+	parentModes := map[string]int64{}
+	tr := tar.NewReader(rc)
+	for {
+		hdr, err := tr.Next()
+		if err == io.EOF {
+			break
+		}
+		require.NoError(t, err)
+		if hdr.Typeflag == tar.TypeDir {
+			parentModes[strings.TrimSuffix(hdr.Name, "/")] = hdr.Mode
+		}
+	}
+
+	require.Equal(t, int64(0o755), parentModes["usr"])
+	require.Equal(t, int64(0o755), parentModes["usr/local"])
+	require.Equal(t, int64(0o755), parentModes["usr/local/bin"])
+}
+
+func TestLayerSymlinkWritesParentDirsWithStablePermissions(t *testing.T) {
+	oldUmask := unix.Umask(0o077)
+	t.Cleanup(func() {
+		unix.Umask(oldUmask)
+	})
+
+	layer, err := LayerSymlink(map[string]string{
+		"etc/systemd/system/multi-user.target.wants/envd.service": "/etc/systemd/system/envd.service",
+	})
+	require.NoError(t, err)
+
+	rc, err := layer.Uncompressed()
+	require.NoError(t, err)
+	defer rc.Close()
+
+	parentModes := map[string]int64{}
+	tr := tar.NewReader(rc)
+	for {
+		hdr, err := tr.Next()
+		if err == io.EOF {
+			break
+		}
+		require.NoError(t, err)
+		if hdr.Typeflag == tar.TypeDir {
+			parentModes[strings.TrimSuffix(hdr.Name, "/")] = hdr.Mode
+		}
+	}
+
+	require.Equal(t, int64(0o755), parentModes["etc"])
+	require.Equal(t, int64(0o755), parentModes["etc/systemd"])
+	require.Equal(t, int64(0o755), parentModes["etc/systemd/system"])
+	require.Equal(t, int64(0o755), parentModes["etc/systemd/system/multi-user.target.wants"])
+}
+
+func TestCreateExportChmodsLayerRoots(t *testing.T) {
+	oldUmask := unix.Umask(0o077)
+	t.Cleanup(func() {
+		unix.Umask(oldUmask)
+	})
+
+	img := empty.Image
+	layer, err := tarball.LayerFromOpener(func() (io.ReadCloser, error) {
+		return io.NopCloser(bytes.NewReader(createFileTar(t, "layer").Bytes())), nil
+	})
+	require.NoError(t, err)
+	img, err = mutate.AppendLayers(img, layer)
+	require.NoError(t, err)
+
+	dir := t.TempDir()
+	layerPaths, err := createExport(t.Context(), logger.NewNopLogger(), img, dir)
+	require.NoError(t, err)
+	require.Len(t, layerPaths, 1)
+
+	info, err := os.Stat(layerPaths[0])
+	require.NoError(t, err)
+	require.Equal(t, os.FileMode(0o755), info.Mode().Perm())
 }
 
 func TestCreateExportLayersOrder(t *testing.T) {
